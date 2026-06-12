@@ -238,6 +238,7 @@ function closeModal(){
 }
 
 // ✅ 儲存（簡單版）
+
 function save(){
 
   if(!currentExpo){
@@ -248,13 +249,25 @@ function save(){
   const v1 = document.getElementById("input1").value;
   const v2 = document.getElementById("input2").value;
 
-  const text = currentType + "：" + v1 + " / " + v2;
+  // ✅ 改成「物件儲存」(關鍵)
+  let data = JSON.parse(localStorage.getItem(currentExpo) || "{}");
 
-  localStorage.setItem(currentExpo, text);
+  data[currentType] = v1 + " / " + v2;
+
+  localStorage.setItem(currentExpo, JSON.stringify(data));
 
   closeModal();
-  selectExpo(currentExpo);
+
+  // ✅ 顯示全部紀錄（不覆蓋）
+  let html = "<b>📌 " + currentExpo + "</b><br><br>";
+
+  for(let key in data){
+    html += "✅ " + key + "：" + data[key] + "<br>";
+  }
+
+  document.getElementById("detail").innerHTML = html;
 }
+
 
 </script>
 
