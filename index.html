@@ -9,10 +9,11 @@
 <style>
 body {
   margin:0;
-  font-family: "Segoe UI","Noto Sans TC",sans-serif;
+  font-family:"Segoe UI","Noto Sans TC",sans-serif;
   background:#f4f7fb;
 }
 
+/* Header */
 .header {
   display:flex;
   justify-content:space-between;
@@ -39,13 +40,15 @@ body {
   cursor:pointer;
 }
 
+/* Layout */
 .layout {
   display:grid;
-  grid-template-columns:250px 1fr;
+  grid-template-columns:260px 1fr;
   gap:20px;
   margin:0 20px 20px 20px;
 }
 
+/* Sidebar */
 .sidebar {
   background:white;
   padding:15px;
@@ -68,6 +71,7 @@ body {
   background:#eef4ff;
 }
 
+/* Card */
 .card {
   background:white;
   padding:15px;
@@ -76,6 +80,7 @@ body {
   margin-bottom:15px;
 }
 
+/* KPI */
 .kpi {
   display:grid;
   grid-template-columns:repeat(4,1fr);
@@ -94,6 +99,7 @@ body {
   margin-top:5px;
 }
 
+/* 甘特 */
 .gantt button {
   margin:5px;
 }
@@ -121,7 +127,6 @@ body {
   <div class="expo" onclick="selectExpo('工具機展')">
     工具機展
   </div>
-
 </div>
 
 <!-- 右側 -->
@@ -156,9 +161,9 @@ body {
   <button onclick="openModal('核定')">核定</button>
   <button onclick="openModal('演練')">演練</button>
   <button onclick="openModal('追蹤')">追蹤</button>
-
 </div>
 
+<!-- 詳細 -->
 <div class="card" id="detail">
 👉 尚未選擇展覽
 </div>
@@ -167,3 +172,5 @@ body {
 
 </div>
 
+</body>
+</html>
