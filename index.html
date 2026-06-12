@@ -1,0 +1,193 @@
+
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<title>年度參展規劃與執行進度總覽</title>
+
+<style>
+body {
+  font-family: Arial;
+  background: #f8fafc;
+  margin: 0;
+}
+
+.header {
+  background: white;
+  padding: 20px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.container {
+  display: flex;
+}
+
+.sidebar {
+  width: 300px;
+  background: white;
+  padding: 10px;
+}
+
+.main {
+  flex: 1;
+  padding: 20px;
+}
+
+.card {
+  background: white;
+  padding: 15px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+}
+
+button {
+  background: #2563eb;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+/* Modal */
+.modal {
+  display: none;
+  position: fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+  background: white;
+  padding: 20px;
+  margin: 100px auto;
+  width: 400px;
+  border-radius: 10px;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="header">
+年度參展規劃與執行進度總覽
+</div>
+
+<div class="container">
+
+<!-- 左側 -->
+<div class="sidebar">
+  <div class="card">
+    <b>展覽列表</b><br><br>
+
+    <div onclick="selectExpo('高雄智慧城市展')">
+      高雄智慧城市展
+    </div>
+
+    <div onclick="selectExpo('工具機展')">
+      工具機展
+    </div>
+  </div>
+</div>
+
+<!-- 中間 -->
+<div class="main">
+
+<!-- KPI -->
+<div class="card">
+  ✅ KPI 卡片  
+  <br>展覽數：3
+  <br>進度：10%
+</div>
+
+<!-- 甘特 -->
+<div class="card">
+  甘特圖（點擊操作）
+  <br><br>
+
+  <button onclick="openModal('approval')">核定</button>
+  <button onclick="openModal('rehearsal')">演練</button>
+  <button onclick="openModal('followup')">追蹤</button>
+</div>
+
+<div class="card" id="detail">
+  👉 尚未選擇展覽
+</div>
+
+</div>
+</div>
+
+<!-- Modal -->
+<div id="modal" class="modal">
+  <div class="modal-content">
+
+    <h3 id="modalTitle"></h3>
+
+    <input id="input1" placeholder="輸入內容"><br><br>
+    <input id="input2" placeholder="輸入日期"><br><br>
+
+    <button onclick="save()">儲存</button>
+    <button onclick="closeModal()">取消</button>
+
+  </div>
+</div>
+
+<script>
+
+let currentExpo = ""
+let currentType = ""
+
+function selectExpo(name){
+  currentExpo = name
+
+  const data = localStorage.getItem(name) || "尚未填寫"
+
+  document.getElementById("detail").innerHTML =
+  "📌 "+ name + "<br><br>" + data
+}
+
+function openModal(type){
+  currentType = type
+
+  document.getElementById("modal").style.display = "block"
+
+  const titleMap = {
+    approval: "核定會議",
+    rehearsal: "演練",
+    followup: "追蹤"
+  }
+
+  document.getElementById("modalTitle").innerText = titleMap[type]
+}
+
+function closeModal(){
+  document.getElementById("modal").style.display = "none"
+}
+
+function save(){
+
+  if(!currentExpo){
+    alert("請先選展覽")
+    return
+  }
+
+  const v1 = document.getElementById("input1").value
+  const v2 = document.getElementById("input2").value
+
+  const text = currentType + "：" + v1 + " / " + v2
+
+  localStorage.setItem(currentExpo, text)
+
+  closeModal()
+  selectExpo(currentExpo)
+}
+
+</script>
+
+</body>
+</html>
